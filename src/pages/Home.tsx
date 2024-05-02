@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+// import NavbarComponent from './Navbar'
+import bgpika from '../asset/bgpika.jpg'
 
 function Home() {
     const [username, setUsername] = useState<string | null>(null)
@@ -26,12 +28,17 @@ function Home() {
     }
 
     return (
-        <div className='flex justify-center items-center h-screen'>
-            <div className='flex justify-center items-center max-w-96 flex-col h-full bg-blue'>
+        <div style={{backgroundImage:`url(${bgpika})`,backgroundSize: `cover`,backgroundPosition: `center`}}>
+        <div className='flex flex-col justify-center items-center h-screen'>
+            <h1 className='text-5xl font-mono mt-80'>FIND YOUR POKEMON !</h1>
+            {/* <NavbarComponent /> */}
+            <div className='flex justify-center items-center max-w-64 flex-col h-full  mb-64'>
+            <h1 className=''>LOGIN</h1>
                 <input type='text' placeholder='username' className='border border-slate-600 rounded-md px-4 py-2 mb-2' onChange={onChangeUsername} />
                 <input type='password' placeholder='password' className='border border-slate-600 rounded-md px-4 py-2 mb-2' onChange={onChangePassword} />
-                <button className='bg-blue-700 font-semibold px-4 py-2 text-white rounded-md w-full' onClick={() => handleLogin()}>Login</button>
+                <button className='bg-black font-semibold px-4 py-2 text-white rounded-md w-full' onClick={() => handleLogin()}>LOGIN</button>
             </div>
+        </div>
         </div>
     )
 }
