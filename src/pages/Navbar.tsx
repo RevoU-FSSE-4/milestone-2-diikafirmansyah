@@ -1,15 +1,43 @@
-function NavbarComponent (){
+import React from "react";
 
-    return (
-        <nav className="flex w-full bg-red-500 top-0 absolute align-center justify-center text-center" > 
-            <div className="flex text-center">
-                
-                <ul className="flex text-center gap-5">
-                    <li>POKEMON</li>
-                </ul>
-            </div>
-        </nav>
-    )
+interface MyComponentProps {
+  home: string;
+  game: string;
+  about: string;
 }
 
-export default NavbarComponent;
+const MyComponent: React.FC<MyComponentProps> = (props) => {
+  return (
+    <div className="bg-white w-full flex align-center justify-center text-center">
+      
+      <ul className="flex gap-10">
+        <li>
+            <a href="home">{props.home}</a>
+        </li>
+      
+      
+        <li>
+            <a href="game">{props.game}</a>
+        </li>
+      
+      
+        <li>
+            <a href="about">{props.about}</a>
+        </li>
+      </ul>
+      {/* <p className="mr-5 text-2xl text-center">{props.home}</p>
+      <p className="mr-5 text-2xl text-center">{props.game}</p>
+      <p className="text-2xl text-center">{props.about}</p> */}
+    </div>
+  );
+};
+
+const Navbar: React.FC = () => {
+  return (
+    <div className="mr-10 w-full flex align-center justify-center text-center">
+      <MyComponent home="Home" game="Game" about="About" />
+    </div>
+  );
+};
+
+export default Navbar;

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import bgdash from '../asset/bgdash.jpg'
-const URL = 'https://pokeapi.co/api/v2/pokemon';
+import React, { useEffect, useState } from "react";
+import bgdash from "../asset/bgdash.jpg";
+import Navbar from "./Navbar";
+const URL = "https://pokeapi.co/api/v2/pokemon";
 const IMG_URL =
-  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/';
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
 type Pokemon = {
   id: number;
   name: string;
@@ -37,7 +38,7 @@ function Dashboard() {
       if (response.ok) {
         setPokemonData(result);
         setLoading(false);
-      } else throw new Error('get pokemon data by name failed!');
+      } else throw new Error("get pokemon data by name failed!");
     } catch (error) {
       alert(error);
       setLoading(false);
@@ -46,39 +47,51 @@ function Dashboard() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const pokemonName = formData.get('PokemonName') as string;
+    const pokemonName = formData.get("PokemonName") as string;
     getPokemonDataByName(pokemonName);
   };
   useEffect(() => {
     if (debouncedSearchTerm) getPokemonDataByName(debouncedSearchTerm);
   }, [debouncedSearchTerm]);
   return (
-    <div style={{backgroundImage:`url(${bgdash})`,backgroundSize: `cover`,backgroundPosition: `center`}}>
-    <div className="flex justify-center h-screen">
-      <div className="flex justify-center items-center max-w-96 flex-col h-full bg-blue">
-        <form className= 'flex flex-col'onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="PokemonName"
-            placeholder="Pokemon Name"
-            className="border border-slate-600 rounded-md px-4 py-2 mb-2"
-          />
-          <button type="submit" className="border-4 border bg-black-200 px-2.5">
-            Submit
-          </button>
-        </form>
-        {!loading && pokemonData && (
-          <img src={`${IMG_URL}${pokemonData.id}.png`} alt={pokemonData.name} />
-        )}
-        {loading && (
-          <div className="animate-spin w-16 mt-10">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
-            </svg>
-          </div>
-        )}
+    <div
+      style={{
+        backgroundImage: `url(${bgdash})`,
+        backgroundSize: `cover`,
+        backgroundPosition: `center`,
+      }}
+    >
+      <div className="flex justify-center h-screen">
+        <div className="flex justify-center items-center max-w-96 flex-col h-full bg-blue">
+          <form className="flex flex-col" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="PokemonName"
+              placeholder="Pokemon Name"
+              className="border border-slate-600 rounded-md px-4 py-2 mb-2"
+            />
+            <button
+              type="submit"
+              className="border-4 border bg-black-200 px-2.5"
+            >
+              Submit
+            </button>
+          </form>
+          {!loading && pokemonData && (
+            <img
+              src={`${IMG_URL}${pokemonData.id}.png`}
+              alt={pokemonData.name}
+            />
+          )}
+          {loading && (
+            <div className="animate-spin w-16 mt-10">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
+              </svg>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
     </div>
   );
 }
